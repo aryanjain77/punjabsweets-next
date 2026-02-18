@@ -1,0 +1,38 @@
+[
+  {
+    "id": "gulab-jamun",
+    "name": "Gulab Jamun",
+    "description": "Soft khoya dumplings soaked in saffron sugar syrup.",
+    "price": 280,
+    "category": "Traditional",
+    "imageUrl": "https://images.pexels.com/photos/14386732/pexels-photo-14386732.jpeg",
+    "isAvailable": true
+  },
+  {
+    "id": "rasgulla",
+    "name": "Rasgulla",
+    "description": "sweet and fresh rasgulla at your doorsteps",
+    "price": 260,
+    "category": "Bengali",
+    "imageUrl": "/uploads/1771261106710-00fe2770.webp",
+    "isAvailable": true
+  },
+  {
+    "id": "kaju-katli",
+    "name": "Kaju Katli",
+    "description": "Thin cashew fudge made with premium kaju.",
+    "price": 900,
+    "category": "Premium",
+    "imageUrl": "https://images.pexels.com/photos/16244839/pexels-photo-16244839.jpeg",
+    "isAvailable": true
+  },
+  {
+    "id": "PROD-1771350142741-84xfyfu6j",
+    "name": "rajbhog",
+    "description": "tasty and delicious",
+    "price": 170,
+    "category": "Seasonal",
+    "imageUrl": "/uploads/1771350142587-0e4433d0.webp",
+    "isAvailable": true
+  }
+]
