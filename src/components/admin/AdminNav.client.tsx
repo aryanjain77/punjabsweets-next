@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useFCMToken } from "@/hooks/useFCMToken";
 
 export function AdminNav({ onLogout }: { onLogout: () => void }) {
+  useFCMToken();
   return (
     <nav className="border-b border-amber-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

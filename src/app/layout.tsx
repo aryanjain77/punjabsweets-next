@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import Script from "next/script";
 import { SHOP_CONFIG } from "../config/shop";
 
 const geistSans = Geist({
@@ -58,6 +59,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50`}
       >
         <Providers>{children}</Providers>
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(() => console.log('SW registered'))
+                  .catch(err => console.error('SW registration failed', err));
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
