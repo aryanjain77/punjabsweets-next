@@ -25,9 +25,13 @@ export function useFCMToken() {
           return;
         }
 
+        const registration = await navigator.serviceWorker.register(
+          "/firebase-messaging-sw.js"
+        );
+        
         const token = await getToken(messaging, {
-          vapidKey:
-            process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+          vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+          serviceWorkerRegistration: registration,
         });
 
         if (!token) {
