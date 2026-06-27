@@ -53,6 +53,15 @@ export function useFCMToken() {
         });
       } catch (error) {
         console.error("FCM registration failed", error);
+        if (error instanceof Error) {
+
+          console.error("Name:", error.name);
+      
+          console.error("Message:", error.message);
+      
+          console.error("Stack:", error.stack);
+      
+        }
       }
     }
 
