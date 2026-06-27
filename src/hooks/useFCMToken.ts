@@ -57,16 +57,32 @@ export function useFCMToken() {
             token,
           }),
         });
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("FCM registration failed", error);
+      
         if (error instanceof Error) {
-
-          console.error("Name:", error.name);
-      
-          console.error("Message:", error.message);
-      
-          console.error("Stack:", error.stack);
-      
+          document.body.insertAdjacentHTML(
+            "beforeend",
+            `
+            <div style="
+              position:fixed;
+              bottom:0;
+              left:0;
+              right:0;
+              z-index:999999;
+              background:#111;
+              color:#0f0;
+              padding:10px;
+              font-size:12px;
+              white-space:pre-wrap;
+            ">
+            Name: ${error.name}<br/>
+            Message: ${error.message}<br/>
+            Stack:<br/>${error.stack ?? "No stack"}
+            </div>
+            `
+          );
         }
       }
     }
