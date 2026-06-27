@@ -28,11 +28,17 @@ export function useFCMToken() {
         const registration = await navigator.serviceWorker.register(
           "/firebase-messaging-sw.js"
         );
+
+        console.log("Before getToken");
+        console.log("VAPID:", process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY);
+        console.log("SW Scope:", registration.scope);
         
         const token = await getToken(messaging, {
           vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
           serviceWorkerRegistration: registration,
         });
+
+        console.log("After getToken");
 
         if (!token) {
           console.log("No FCM token generated");
