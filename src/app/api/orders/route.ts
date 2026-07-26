@@ -4,6 +4,7 @@ import { addOrder, getOrdersPage, getProducts } from "@/lib/store";
 import { Order, type OrderStatus } from "@/lib/types";
 import { SHOP_CONFIG } from "@/config/shop";
 import crypto from "crypto";
+import { sendTelegramMessage } from "@/lib/telegram";
 
 export const runtime = "nodejs";
 
@@ -207,6 +208,47 @@ export async function POST(request: NextRequest) {
     };
 
     await addOrder(order);
+
+    const itemList = order.items
+      .map(
+        (item) =>
+          `• ${item.quantity} × ${item.name}${
+            item.variantName ? ` (${item.variantName})` : ""
+          }`
+      )
+      .join("\n");
+    
+    await sendTelegramMessage(
+    `🛒 NEW ORDER
+    
+    🆔 Order ID:
+    ${order.id}
+    
+    👤 Customer:
+    ${order.customerName}
+    
+    📞 Phone:
+    ${order.phone}
+    
+    💰 Total:
+    ₹${order.totalAmount}
+    
+    💳 Payment:
+    ${order.paymentMethod.toUpperCase()}
+    
+    📍 Address:
+    ${order.addressLine1}
+    ${order.addressLine2 ?? ""}
+    ${order.pincode}
+    
+    📦 Items:
+    ${itemList}
+    
+    📍 Google Maps:
+    https://www.google.com/maps?q=${order.latitude},${order.longitude}
+    
+    ${order.notes ? `📝 Notes:\n${order.notes}` : ""}
+    `);
 
     return NextResponse.json(
       {
